@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="132" height="132" viewBox="0 0 132 132">
+  <g id="Group_209" data-name="Group 209" transform="translate(-1007 -5225)">
+    <g id="Group_207" data-name="Group 207">
+      <circle id="Ellipse_116" data-name="Ellipse 116" cx="66" cy="66" r="66" transform="translate(1007 5225)" fill="#fae5e0"/>
+      <g id="noun_chip_3060983" transform="translate(1021.825 5166)">
+        <g id="Group_148" data-name="Group 148" transform="translate(22.175 85)">
+          <path id="Path_223" data-name="Path 223" d="M187.2,85h30.466L236.3,105.975v49.683a8.487,8.487,0,0,1-8.2,8.671H187.2a8.411,8.411,0,0,1-8.2-8.671v-62.1A8.381,8.381,0,0,1,187.2,85Zm29.06,36.09v10.78h9.257v-9.14A1.579,1.579,0,0,0,224,121.09Zm9.257,14.53h-9.257v5.507h9.257Zm0,9.257h-9.257v5.273H224a1.579,1.579,0,0,0,1.523-1.64ZM212.63,150.15V121.09H191.3a1.579,1.579,0,0,0-1.523,1.64v11.015h13.007v3.75h0v3.632h0v3.75h0v5.273Zm-13.475,0v-5.273H189.78v3.632a1.579,1.579,0,0,0,1.523,1.64Zm-9.374-9.023h9.374V137.5H189.78Z" transform="translate(-179 -85)" fill="#fa795b" fill-rule="evenodd"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

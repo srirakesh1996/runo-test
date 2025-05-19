@@ -1,0 +1,217 @@
+@media only screen and (max-width: 768px) {
+	.primary-logo img {
+		width: 80px;
+	}
+	.top-bg:after {
+		width: 300px;
+		height: 300px;
+	}
+	.intro-media img {
+		width: 250px;
+	}
+	.trust-container:before {
+		width: 150px;
+	}
+	.cms-container:before {
+		width: 100px;
+		height: 100px;
+		transform: translate(-30px, 15px);
+	}
+	.cms-container:after {
+		width: 50px;
+		height: 200px;
+	}
+	.cms-header .cms-heading {
+		font-size: 25px;
+    	line-height: 35px;
+	}
+	.crm-graphic {
+		width: 300px;
+		margin: 0 auto;
+    	display: block;
+	}
+	.container-sm {
+		padding: 0 20px;
+	}
+	.primary-header {
+		padding: 1.5em 0;
+	}
+	.primary-nav-list {
+		display: block;
+	}
+	.primary-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 999;
+        background-color: #FFFFFF;
+        box-shadow: 0 1px 20px #eee;
+        height: 100%;
+        width: 280px;
+        text-align: left
+    }
+    .primary-nav ul.primary-nav-list li {
+        display: block;
+        margin: 25px 30px;
+        width: 200px
+    }
+    .primary-nav-list .primary-nav-item .dropdown-menu {
+    	left: 0;
+    	right: 0;
+    }
+    .primary-nav-list .primary-nav-item .dropdown-menu .dropdown-menu-item {
+    	margin: 10px 5px;
+    	width: auto;
+    }
+	.hamburger {
+        display: block;
+        float: right;
+        margin: 5px 0 0;
+        position: absolute;
+        right: 30px;
+        top: 20px;
+        z-index: 999
+    }
+    .intro-content {
+    	padding: 3em 0;
+    }
+    .download-btn {
+    	padding: 10px 16px;
+    	font-size: 14px;
+    }
+    .cms-body .automate-heading {
+    	font-size: 30px;
+    }
+    .best-header .best-heading {
+    	font-size: 25px;
+    	line-height: 35px;
+    }
+    .best-container:before {
+    	width: 220px;
+    	transform: translate(-140px, 25px);
+    }
+    .demo-content {
+    	padding: 0;
+    }
+    .demo-content .demo-heading {
+    	font-size: 26px;
+    }
+    .works-card-container {
+    	padding: 2em 0em;
+    }
+    .works-card-row {
+    	display: flex;
+	    flex-wrap: wrap;
+	    justify-content: center;
+	    gap: 20px;
+    }
+    .works-box {
+    	width: 80%;
+    }
+	.works-container:before {
+		width: 300px;
+		height: 300px;
+		transform: translate(-80px, 10px);
+	}
+	.reviews-box {
+		flex-wrap: wrap;
+    	justify-content: center;
+    	gap: 0;
+    	padding: 0 25px;
+	}
+	.reviews-box .reviews-body {
+		padding: 0;
+	}
+	.testimonials-container:after {
+		width: 75px;
+		right: 10px;
+		height: 180px;
+		transform: translate(0px, 30px);
+	}
+	.services-container:before {
+		transform: translate(10px, 0px);
+		width: 80px;
+	}
+	.services-container:after {
+		width: 150px;
+		right: 100px;
+		height: 300px;
+		transform: translate(200px, 10px);
+    	top: 0;
+	}
+	.superlead-img {
+		margin: 0 auto;
+		display: block;
+		width: 100%;
+    	height: 100%;
+    	position: relative;
+    	z-index: 2;
+	}
+	.superlead-box {
+		position: relative;
+		transform: translate(0, -50px);
+		height: auto;
+	}
+	.superlead-mobile {
+		transform: translate(0px, 0px);
+    	width: 100%;
+	}
+	.superlead-mobile img {
+		width: 250px;
+		margin: 0 auto;
+		display: block;
+	}
+	.footer-container {
+		padding: 0em 0 3em;
+	}
+	.request-form {
+		transform: translate(0,0);
+		padding: 2em 2em 2em 2em;
+	}
+	.product-feature {
+		padding: 0 10px;
+	}
+	.product-feature img {
+		width: 130px;
+	}
+	.bs-card-grid {
+		grid-template-columns: 1fr repeat(1, 1fr);
+	}
+	.calling-grid {
+		margin: 2em 0;
+	}
+	.calling-grid-item {
+		text-align: center;
+	}
+	.calling-grid-item .text {
+		padding: 0;
+	}
+	.security-svg {
+		margin-top: 1em;
+	}
+	.security-bx {
+		padding: 0;
+	}
+	.security-bx-grid {
+		padding-right: 0;
+	}
+	.security-bx-grid-item {
+		padding: 0 1em 0 0;
+	}
+	.security-bx-grid-item .head {
+		padding: 0;
+	}
+	.next-gen-img {
+		width: 100%;
+		margin: 0 auto;
+    	display: block;
+	}
+	.next-gen-media {
+		display: block;
+	}
+	.pricing-card.popular {
+		margin-top: 4em;
+		transform: scale(1);
+	}
+}
