@@ -1539,33 +1539,28 @@
             <!-- ========= SCRIPTS ========= -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-           <script>
-    /* ---------- VIDEO MODAL ---------- */
-    // play video when a thumbnail is clicked
-    $(document).on("click", ".video-card", function () {
-      $("#videoFrame").attr(
-        "src",
-        "https://www.youtube.com/embed/" + $(this).data("video-id") + "?autoplay=1"
-      );
-      $("#videoModal").modal("show");
-    });
-    // stop video on modal hide
-    $("#videoModal").on("hidden.bs.modal", function () {
-      $("#videoFrame").attr("src", "");
-    });
+          
+  <script>
+  // open & autoplay
+  $(document).on('click', '.video-card', function (e) {
+    e.preventDefault();
+    $('#videoFrame').attr(
+      'src',
+      'https://www.youtube.com/embed/' + $(this).data('video-id') + '?autoplay=1'
+    );
+    $('#videoModal').modal('show');
+  });
 
-    /* ---------- UNIVERSAL BACKDROP CLEANUP ---------- */
-    function cleanModalBackdrop() {
-      if ($('.modal.in').length === 0) {           // no modals currently open
-        $('.modal-backdrop').remove();             // delete any orphan backdrop
-        $('body').removeClass('modal-open');       // re‑enable page scroll
-      }
-    }
-    // Attach to the hidden event of *both* modals
-    $('#videoModal, #formModal').on('hidden.bs.modal', cleanModalBackdrop);
+  // stop video + remove any stuck backdrop
+  $('#videoModal').on('hidden.bs.modal', function () {
+    $('#videoFrame').attr('src', '');
 
+    // force‑clean backdrops/body state
+    $('.modal-backdrop').remove();
+    $('body').removeClass('modal-open').css('padding-right', '');
+  });
+</script>
 
-  </script>
         </div>
         <footer class="footer-container">
             <div class="container">
