@@ -1536,23 +1536,8 @@
                     </div>
                 </div>
             </div>
-         
-            <script>
-            
-                $(document).on("click", ".video-card", function () {
-                  $("#videoFrame").attr(
-                    "src",
-                    "https://www.youtube.com/embed/" +
-                      $(this).data("video-id") +
-                      "?autoplay=1"
-                  );
-                  $("#videoModal").modal("show");
-                });
-            
-                $("#videoModal").on("hidden.bs.modal", function () {
-                  $("#videoFrame").attr("src", "");
-                });
-            </script>
+       
+          
         </div>
         <footer class="footer-container">
             <div class="container">
@@ -1605,9 +1590,24 @@
                 </div>
             </div>
         </div>
-           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-     
+            <script>
+                // play video
+                $(document).on("click", ".video-card", function () {
+                  $("#videoFrame").attr(
+                    "src",
+                    "https://www.youtube.com/embed/" +
+                      $(this).data("video-id") +
+                      "?autoplay=1"
+                  );
+                  $("#videoModal").modal("show");
+                });
+                // stop video
+                $("#videoModal").on("hidden.bs.modal", function () {
+                  $("#videoFrame").attr("src", "");
+                });
+            </script>
         <script src="js/owl.carousel-min.js"></script>
         <script src="js/main.js"></script>
         <script type="text/javascript">
