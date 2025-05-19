@@ -1521,78 +1521,54 @@
             <!-- /.section-wrapper -->
             <!-- Video Modal -->
 
-            <style>
-                .modal2 {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    display: none;
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch;
-    outline: 0
-}
+           
+          <!-- ========== VIDEO MODAL ========== -->
+<div id="videoModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document"><!-- modal-lg = wider video -->
+    <div class="modal-content" style="background:#000;border:none;border-radius:6px;overflow:hidden;">
+      <button type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              style="position:absolute;right:20px;top:15px;color:#fff;opacity:1;">
+        <span aria-hidden="true" style="font-size:30px;">&times;</span>
+      </button>
 
-.modal2.fade .modal-dialog {
-    -webkit-transition: -webkit-transform .3s ease-out;
-    -o-transition: -o-transform .3s ease-out;
-    transition: transform .3s ease-out;
-    -webkit-transform: translate(0,-25%);
-    -ms-transform: translate(0,-25%);
-    -o-transform: translate(0,-25%);
-    transform: translate(0,-25%)
-}
+      <div class="modal-body" style="padding:0;">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe id="videoFrame" class="embed-responsive-item" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-.modal2.in .modal-dialog {
-    -webkit-transform: translate(0,0);
-    -ms-transform: translate(0,0);
-    -o-transform: translate(0,0);
-    transform: translate(0,0)
-}
+<!-- ========== SCRIPTS ========== -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+  /* open & autoplay */
+  $(document).on('click', '.video-card', function (e) {
+    e.preventDefault();
+    $('#videoFrame').attr(
+      'src',
+      'https://www.youtube.com/embed/' + $(this).data('video-id') + '?autoplay=1'
+    );
+    $('#videoModal').modal('show');
+  });
 
-.modal-open .modal2 {
-    overflow-x: hidden;
-    overflow-y: auto
-}
+  /* stop video and clean up backdrops */
+  $(document).on('hidden.bs.modal', '#videoModal', function () {
+    $('#videoFrame').attr('src', '');          // stop the video
 
+    // if no other modals are open, remove any leftover backdrop and body padding
+    if ($('.modal:visible').length === 0) {
+      $('.modal-backdrop').remove();
+      $('body').removeClass('modal-open').css('padding-right', '');
+    }
+  });
+</script>
 
-</style>
-
-            <div class="modal2 fade" id="videoModal" tabindex="-1">
-                <div class="modal-box">
-                    <div class="modal-content">
-                        <button type="button" class="close" style="position: absolute;right: 20px; top: 15px;z-index: 9999;color: #ffffff;opacity: 1;" data-dismiss="modal">
-                            <span style="font-size: 30px;">&times;</span>
-                        </button>
-                        <div class="modal-body" style="padding:0">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe id="videoFrame" class="embed-responsive-item" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ========= SCRIPTS ========= -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-            <script>
-                // play video
-                $(document).on("click", ".video-card", function () {
-                  $("#videoFrame").attr(
-                    "src",
-                    "https://www.youtube.com/embed/" +
-                      $(this).data("video-id") +
-                      "?autoplay=1"
-                  );
-                  $("#videoModal").modal("show");
-                });
-                // stop video
-                $("#videoModal").on("hidden.bs.modal", function () {
-                  $("#videoFrame").attr("src", "");
-                });
-            </script>
         </div>
         <footer class="footer-container">
             <div class="container">
