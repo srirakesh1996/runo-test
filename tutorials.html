@@ -1536,31 +1536,23 @@
                     </div>
                 </div>
             </div>
-            <!-- ========= SCRIPTS ========= -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-          
-  <script>
-  // open & autoplay
-  $(document).on('click', '.video-card', function (e) {
-    e.preventDefault();
-    $('#videoFrame').attr(
-      'src',
-      'https://www.youtube.com/embed/' + $(this).data('video-id') + '?autoplay=1'
-    );
-    $('#videoModal').modal('show');
-  });
-
-  // stop video + remove any stuck backdrop
-  $('#videoModal').on('hidden.bs.modal', function () {
-    $('#videoFrame').attr('src', '');
-
-    // force‑clean backdrops/body state
-    $('.modal-backdrop').remove();
-    $('body').removeClass('modal-open').css('padding-right', '');
-  });
-</script>
-
+         
+            <script>
+            
+                $(document).on("click", ".video-card", function () {
+                  $("#videoFrame").attr(
+                    "src",
+                    "https://www.youtube.com/embed/" +
+                      $(this).data("video-id") +
+                      "?autoplay=1"
+                  );
+                  $("#videoModal").modal("show");
+                });
+            
+                $("#videoModal").on("hidden.bs.modal", function () {
+                  $("#videoFrame").attr("src", "");
+                });
+            </script>
         </div>
         <footer class="footer-container">
             <div class="container">
@@ -1613,6 +1605,7 @@
                 </div>
             </div>
         </div>
+  
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/owl.carousel-min.js"></script>
