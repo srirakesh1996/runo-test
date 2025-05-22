@@ -186,30 +186,21 @@ function showThankYou() {
 
 
 
-  // === Utility: Set & Get Cookies ===
   function setCookie(name, value, minutes) {
-    const expires = new Date(Date.now() + minutes * 60 * 1000).toUTCString();
+    const expires = new Date(Date.now() + minutes * 60000).toUTCString();
     document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
   }
 
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
-  }
+  const params = new URLSearchParams(window.location.search);
+  const utmSource = params.get("utm_source");
+  const utmCampaign = params.get("utm_campaign");
 
-  // === Save UTM Parameters on Page Load ===
-  function saveUTMParamsToCookies() {
-    const params = new URLSearchParams(window.location.search);
-    const utmSource = params.get("utm_source");
-    const utmCampaign = params.get("utm_campaign");
+  if (utmSource) setCookie("utm_source", utmSource, 30);
+  if (utmCampaign) setCookie("utm_campaign", utmCampaign, 30);
 
-    if (utmSource) setCookie("utm_source", utmSource, 30);
-    if (utmCampaign) setCookie("utm_campaign", utmCampaign, 30);
-  }
 
-  // === Call on load ===
-  saveUTMParamsToCookies();
+
+  
 
 function submitForm(formId, formData, formToken) {
   jQuery(function ($) {
