@@ -211,43 +211,45 @@ function showThankYou() {
   // === Call on load ===
   saveUTMParamsToCookies();
 
-  // === Submit Form Function ===
-  function submitForm(formId, formData, formToken) {
-    jQuery(function ($) {
-      $(`#${formId}-btn`).prop("disabled", true);
+function submitForm(formId, formData, formToken) {
+  jQuery(function ($) {
+    $(`#${formId}-btn`).prop("disabled", true);
 
-      const utmSource = getCookie("utm_source");
-      const utmCampaign = getCookie("utm_campaign");
+    const utmSource = getCookie("utm_source");
+    const utmCampaign = getCookie("utm_campaign");
 
-      formData["custom_source"] = "Website Enquiry- IB";
-      formData["custom_status"] = "Api Allocation";
-      if (utmSource) formData["custom_utm source"] = utmSource;
-      if (utmCampaign) formData["custom_utm campaign"] = utmCampaign;
+    formData["custom_source"] = "Website Enquiry- IB";
+    formData["custom_status"] = "Api Allocation";
+    if (utmSource) formData["custom_utm source"] = utmSource;
+    if (utmCampaign) formData["custom_utm campaign"] = utmCampaign;
 
-      $.ajax({
-        type: "POST",
-        url: `https://api-call-crm.runo.in/integration/webhook/wb/5d70a2816082af4daf1e377e/${formToken}`,
-        data: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        contentType: "application/json",
+    // ✅ Print final form data to console
+    console.log(`Submitting form: ${formId}`);
+    console.log("Form Data Sent to API:", formData);
+
+    $.ajax({
+      type: "POST",
+      url: `https://api-call-crm.runo.in/integration/webhook/wb/5d70a2816082af4daf1e377e/${formToken}`,
+      data: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      contentType: "application/json",
+    })
+      .done(function (data) {
+        console.log("✅ Success:", data);
+        $(`#${formId}`)[0].reset();
+        $(`#${formId}-btn`).prop("disabled", false);
+        $("#modal").modal("hide");
+        showThankYou();
+        trackingListener();
       })
-        .done(function (data) {
-          console.log("Success:", data);
-          $(`#${formId}`)[0].reset();
-          $(`#${formId}-btn`).prop("disabled", false);
-          $("#modal").modal("hide");
-          showThankYou();
-          trackingListener();
-        })
-        .fail(function (a, b) {
-          console.log("Error:", a, b);
-          $(`#${formId}`)[0].reset();
-          $(`#${formId}-btn`).prop("disabled", false);
-        });
-    });
-  }
+      .fail(function (a, b) {
+        console.log("❌ Error:", a, b);
+        $(`#${formId}`)[0].reset();
+        $(`#${formId}-btn`).prop("disabled", false);
+      });
+  });
+}
 
 
-  
