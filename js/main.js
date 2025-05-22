@@ -185,25 +185,27 @@ function showThankYou() {
 }
 
 
-
-  // === Utility: Set & Get Cookies ===
   function setCookie(name, value, minutes) {
     const expires = new Date(Date.now() + minutes * 60 * 1000).toUTCString();
     document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
   }
 
   function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
+    console.log("🔍 Full cookie string:", value); // Logs full cookie string with prefix
+  
+  const parts = value.split(`; ${name}=`);
+  console.log(`🔍 Splitting with key "; ${name}=" gives:`, parts); // Logs parts after splits
     if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
   }
 
     const params = new URLSearchParams(window.location.search);
     const utmSource = params.get("utm_source");
     const utmCampaign = params.get("utm_campaign");
+    const utmMedium = params.get("utm_medium");
 
     if (utmSource) setCookie("utm_source", utmSource, 30);
     if (utmCampaign) setCookie("utm_campaign", utmCampaign, 30);
+        if (utmMedium) setCookie("utm_medium", utmMedium, 30);
 
 
 function submitForm(formId, formData, formToken) {
