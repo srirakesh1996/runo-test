@@ -184,44 +184,70 @@ function showThankYou() {
   });
 }
 
-function submitForm(formId, formData, formToken) {
-  jQuery(function ($) {
-    $(`#${formId}-btn`).prop("disabled", true);
+
+
+  // === Utility: Set & Get Cookies ===
+  function setCookie(name, value, minutes) {
+    const expires = new Date(Date.now() + minutes * 60 * 1000).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+  }
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+  }
+
+  // === Save UTM Parameters on Page Load ===
+  function saveUTMParamsToCookies() {
     const params = new URLSearchParams(window.location.search);
     const utmSource = params.get("utm_source");
     const utmCampaign = params.get("utm_campaign");
-    // const notes = `This lead has reached out to our website using utm_source as ${
-    //   utmSource || "N/A"
-    // } and utm_campaign as ${utmCampaign || "N/A"}`;
-    //formData["your_notes"] = notes;
-    formData["custom_source"] = "Website Enquiry- IB";
-    formData["custom_status"] = "Api Allocation";
-    if (utmSource) formData["custom_utm source"] = utmSource;
-    if (utmCampaign) formData["custom_utm campaign"] = utmCampaign;
-    $.ajax({
-      type: "POST",
-      url: `https://api-call-crm.runo.in/integration/webhook/wb/5d70a2816082af4daf1e377e/${formToken}`,
-      data: JSON.stringify(formData),
-      success: function () {},
-      headers: {
-        "Content-Type": "application/json",
-      },
-      contentType: "application/json",
-    })
-      .done(function (data) {
-        console.log(data);
-        $(`#${formId}`)[0].reset();
-        $(`#${formId}-btn`).prop("disabled", false);
-        $("#modal").modal("hide");
-        showThankYou();
-        trackingListener();
-        //Disabled as it's not working
-        //gtag_report_conversion();
+
+    if (utmSource) setCookie("utm_source", utmSource, 30);
+    if (utmCampaign) setCookie("utm_campaign", utmCampaign, 30);
+  }
+
+  // === Call on load ===
+  saveUTMParamsToCookies();
+
+  // === Submit Form Function ===
+  function submitForm(formId, formData, formToken) {
+    jQuery(function ($) {
+      $(`#${formId}-btn`).prop("disabled", true);
+
+      const utmSource = getCookie("utm_source");
+      const utmCampaign = getCookie("utm_campaign");
+
+      formData["custom_source"] = "Website Enquiry- IB";
+      formData["custom_status"] = "Api Allocation";
+      if (utmSource) formData["custom_utm source"] = utmSource;
+      if (utmCampaign) formData["custom_utm campaign"] = utmCampaign;
+
+      $.ajax({
+        type: "POST",
+        url: `https://api-call-crm.runo.in/integration/webhook/wb/5d70a2816082af4daf1e377e/${formToken}`,
+        data: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        contentType: "application/json",
       })
-      .fail(function (a, b) {
-        console.log(a, b);
-        $(`#${formId}`)[0].reset();
-        $(`#${formId}-btn`).prop("disabled", false);
-      });
-  });
-}
+        .done(function (data) {
+          console.log("Success:", data);
+          $(`#${formId}`)[0].reset();
+          $(`#${formId}-btn`).prop("disabled", false);
+          $("#modal").modal("hide");
+          showThankYou();
+          trackingListener();
+        })
+        .fail(function (a, b) {
+          console.log("Error:", a, b);
+          $(`#${formId}`)[0].reset();
+          $(`#${formId}-btn`).prop("disabled", false);
+        });
+    });
+  }
+
+
+  
