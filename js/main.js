@@ -184,43 +184,25 @@ function showThankYou() {
   });
 }
 
-// ✅ Utility: Set a cookie for a given number of minutes
-function setCookie(name, value, minutes) {
-  const expires = new Date(Date.now() + minutes * 60 * 1000).toUTCString();
-  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
-}
 
-// ✅ Utility: Get a cookie by name, with debug logs
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  console.log("🔍 Full cookie string:", value); // Logs full cookie string with prefix
-
-  const parts = value.split(`; ${name}=`);
-  console.log(`🔍 Splitting with key "; ${name}=" gives:`, parts); // Logs parts after split
-
-  if (parts.length === 2) {
-    const rawValue = parts.pop().split(';').shift();
-    const decodedValue = decodeURIComponent(rawValue);
-    console.log(`✅ Cookie "${name}" found:`, decodedValue);
-    return decodedValue;
-  } else {
-    console.warn(`⚠️ Cookie "${name}" not found.`);
-    return null;
+  function setCookie(name, value, minutes) {
+    const expires = new Date(Date.now() + minutes * 60 * 1000).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
   }
-}
 
-// ✅ Save UTM parameters from URL to cookies (if present)
-(function () {
-  const params = new URLSearchParams(window.location.search);
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+  }
 
-  const utmSource = params.get("utm_source");
-  const utmCampaign = params.get("utm_campaign");
-  const utmMedium = params.get("utm_medium");
+    const params = new URLSearchParams(window.location.search);
+    const utmSource = params.get("utm_source");
+    const utmCampaign = params.get("utm_campaign");
 
-  if (utmSource) setCookie("utm_source", utmSource, 30);
-  if (utmCampaign) setCookie("utm_campaign", utmCampaign, 30);
-  if (utmMedium) setCookie("utm_medium", utmMedium, 30);
-})();
+    if (utmSource) setCookie("utm_source", utmSource, 30);
+    if (utmCampaign) setCookie("utm_campaign", utmCampaign, 30);
+
 
 function submitForm(formId, formData, formToken) {
   jQuery(function ($) {
