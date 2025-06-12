@@ -231,19 +231,61 @@
         <!-- Video Section -->
         <div class="section-wrapper">
             <div class="container">
-
                 <div class="videos">
-
                     <div class="row">
-
                         <div class="col-md-offset-2 col-md-8 col-md-offset-2">
                             <div class="cms-header">
                                 <h2 class="cms-heading">Tutorial Videos</h2>
-
                             </div>
                         </div>
                     </div>
                     <!-- ========= TABS ========= -->
+                    <div class="row" style="margin-bottom:20px;">
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                        <link rel="stylesheet"
+                            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="input-group">
+                                <input type="text" id="videoSearch" class="form-control" placeholder="Search videos..."
+                                    style="padding: 22px;">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="searchBtn" type="button" style="padding: 12px;">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <script>
+                                function performSearch() {
+                                    const search = document.getElementById("videoSearch").value.trim().toLowerCase();
+                                    if (!search) return;
+
+                                    const results = [];
+
+                                    document.querySelectorAll(".video-card").forEach(card => {
+                                        const title = card.querySelector("h4")?.innerText.trim();
+                                        const videoId = card.getAttribute("data-video-id");
+
+                                        const tabPane = card.closest('.tab-pane');
+                                        const category = tabPane ? tabPane.id.charAt(0).toUpperCase() + tabPane.id.slice(1) : 'Unknown';
+
+                                        if (title && title.toLowerCase().includes(search)) {
+                                            results.push({ title, videoId, category });
+                                        }
+                                    });
+
+                                    localStorage.setItem("videoSearchResults", JSON.stringify(results));
+                                    localStorage.setItem("videoSearchTerm", search);
+                                    window.location.href = "search-results.html";
+                                }
+
+                                document.getElementById("videoSearch").addEventListener("keypress", function (e) {
+                                    if (e.key === "Enter") performSearch();
+                                });
+
+                                document.getElementById("searchBtn").addEventListener("click", performSearch);
+                            </script>
+                        </div>
+                    </div>
                     <ul class="nav nav-pills text-center" role="tablist">
                         <li class="active">
                             <a href="#admin" role="tab" data-toggle="tab">Admin</a>
@@ -256,12 +298,8 @@
                     <div class="tab-content">
                         <!-- ===== ADMIN ===== -->
                         <div role="tabpanel" class="tab-pane fade in active" id="admin">
-
-
                             <div class="row">
-
                                 <h2 class="cat-head"> Category 1</h2>
-
                                 <div class="col-xs-12 col-sm-6 col-md-4">
                                     <div class="thumbnail video-card" data-video-id="uEzI9m8zNBE">
                                         <div class="caption">
@@ -363,13 +401,8 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="row">
-
                                 <h2 class="cat-head"> Category 2</h2>
-
-
                                 <div class="col-xs-12 col-sm-6 col-md-4">
                                     <div class="thumbnail video-card" data-video-id="Z7tYSuzPAc4">
                                         <div class="caption">
@@ -489,11 +522,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="row">
-
                                 <h2 class="cat-head"> Category 3</h2>
                                 <div class="col-xs-12 col-sm-6 col-md-4">
                                     <div class="thumbnail video-card" data-video-id="auou5QUx3H8">
@@ -591,23 +621,18 @@
                                         <div class="caption">
                                             <h4>
                                                 How to access Admin Activity Logs | Web Version | Runo
-
                                             </h4>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="row">
-
                                 <h2 class="cat-head"> Category 4</h2>
                                 <div class="col-xs-12 col-sm-6 col-md-4">
                                     <div class="thumbnail video-card" data-video-id="2b6XlVDh8dA">
                                         <div class="caption">
                                             <h4>
                                                 How to access Admin Activity Logs | Web Version | Runo
-
                                             </h4>
                                         </div>
                                     </div>
@@ -749,9 +774,7 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
-
                                 <h2 class="cat-head"> Category 5</h2>
                                 <div class="col-xs-12 col-sm-6 col-md-4">
                                     <div class="thumbnail video-card" data-video-id="BF2okjeOJeA">
@@ -914,7 +937,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- ===== MANAGER ===== -->
                         <div role="tabpanel" class="tab-pane fade" id="manager">
                             <div class="row">
@@ -1128,7 +1150,6 @@
                         </div>
                         <!-- ===== USER ===== -->
                         <div role="tabpanel" class="tab-pane fade" id="user">
-
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-4">
                                     <div class="thumbnail video-card" data-video-id="iD1ztxx3Gcg">
@@ -1555,16 +1576,11 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
         <!-- /.section-wrapper -->
-
         <!-- Video Modal -->
-
         <div class="modal fade" id="videoModal" tabindex="-1">
             <div class="modal-box">
                 <div class="modal-content">
@@ -1581,8 +1597,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
     <footer class="footer-container">
         <div class="container">
