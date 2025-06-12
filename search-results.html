@@ -235,7 +235,7 @@
             </div>
         </div>
         <div class="container">
-            <h2 class="text-center mb-20 search-results">Search Results for: <span id="searchTerm"></span></h2>
+            <h2 class="text-center mb-20 search-results">Search Results for: "<span id="searchTerm"></span>"</h2>
             <div class="row" id="resultsContainer"></div>
         </div>
         <!-- Modal -->
@@ -378,7 +378,7 @@
                     .serializeArray()
                     .reduce(function (obj, item) {
                         obj[item.name] = item.value;
-                        obj["custom_page"] = "Home";
+                        obj["custom_page"] = "Search Results";
                         return obj;
                     }, {});
                 submitForm(
@@ -394,7 +394,7 @@
                     .serializeArray()
                     .reduce(function (obj, item) {
                         obj[item.name] = item.value;
-                        obj["custom_page"] = "Home";
+                        obj["custom_page"] = "Search Results";
                         return obj;
                     }, {});
                 submitForm(
